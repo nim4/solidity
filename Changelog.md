@@ -1,6 +1,7 @@
 ### 0.8.1 (unreleased)
 
-
+Compiler Features:
+ * Parser: Report meaningful error if parsing a version pragma failed.
 
 ### 0.8.0 (2020-12-16)
 
