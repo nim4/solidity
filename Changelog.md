@@ -2,6 +2,7 @@
 
 Compiler Features:
  * Parser: Report meaningful error if parsing a version pragma failed.
+ * Parser: Properly reject misformatted version pragmas (e.g. ``^0^1`` was misparsed).
 
 ### 0.8.0 (2020-12-16)
 

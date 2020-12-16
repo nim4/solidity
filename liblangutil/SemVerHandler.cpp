@@ -228,6 +228,8 @@ SemVerMatchExpression::MatchComponent SemVerMatchExpressionParser::parseMatchCom
 		component.levelsPresent++;
 		if (currentChar() == '.')
 			nextChar();
+		else if ('0' < currentChar() || currentChar() > '9')
+			throw SemVerError();
 		else
 			break;
 	}
