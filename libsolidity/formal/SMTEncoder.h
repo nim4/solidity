@@ -355,6 +355,11 @@ protected:
 	/// Used to retrieve models.
 	std::set<Expression const*> m_uninterpretedTerms;
 	std::vector<smtutil::Expression> m_pathConditions;
+
+	/// Whether the currently visited block uses checked
+	/// or unchecked arithmetic.
+	bool m_checked = true;
+
 	/// Local SMTEncoder ErrorReporter.
 	/// This is necessary to show the "No SMT solver available"
 	/// warning before the others in case it's needed.

@@ -1765,6 +1765,9 @@ pair<smtutil::Expression, smtutil::Expression> SMTEncoder::arithmeticOperation(
 		}
 	}();
 
+	if (m_checked)
+		return {valueUnbounded, valueUnbounded};
+
 	if (_op == Token::Div || _op == Token::Mod)
 	{
 		// mod and unsigned division never underflow/overflow
@@ -2388,6 +2391,12 @@ void SMTEncoder::defineExpr(Expression const& _e, smtutil::Expression _value)
 	createExpr(_e);
 	solAssert(_value.sort->kind != smtutil::Kind::Function, "Equality operator applied to type that is not fully supported");
 	m_context.addAssertion(expr(_e) == _value);
+
+	if (
+		auto type = _e.annotation().type;
+		m_checked && smt::isNumber(*type)
+	)
+		smt::setSymbolicUnknownValue(expr(_e), type, m_context);
 }
 
 void SMTEncoder::popPathCondition()
